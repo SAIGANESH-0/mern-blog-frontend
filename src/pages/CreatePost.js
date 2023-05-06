@@ -17,10 +17,14 @@ export default function CreatePost() {
     data.set("content", content);
     data.set("file", files[0]);
     ev.preventDefault();
+    const token = localStorage.getItem("token");
     const response = await fetch("https://mernblog-pse9.onrender.com/post", {
       method: "POST",
       body: data,
       credentials: "include",
+      headers: {
+        Authorization: `Bearer ${token}`, // add the JWT to the Authorization header
+      },
     });
     if (response.ok) {
       setRedirect(true);
